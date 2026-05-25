@@ -34,7 +34,8 @@
 
   <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
     <div
-      class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      class="relative fade-up overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      style="animation-delay: 0.1s"
     >
       <img
         class="h-full w-full object-cover aspect-square group-hover:scale-110 transition-transform duration-500"
@@ -54,7 +55,8 @@
     </div>
 
     <div
-      class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      class="relative fade-up overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      style="animation-delay: 0.2s"
     >
       <img
         class="h-full w-full object-cover aspect-square group-hover:scale-110 transition-transform duration-500"
@@ -73,7 +75,8 @@
     </div>
 
     <div
-      class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      class="relative fade-up overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      style="animation-delay: 0.3s"
     >
       <img
         class="h-full w-full object-cover aspect-square group-hover:scale-110 transition-transform duration-500"
@@ -93,7 +96,8 @@
     </div>
 
     <div
-      class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      class="relative fade-up overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      style="animation-delay: 0.4s"
     >
       <img
         class="h-full w-full object-cover aspect-square group-hover:scale-110 transition-transform duration-500"
@@ -113,7 +117,8 @@
     </div>
 
     <div
-      class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      class="relative fade-up overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      style="animation-delay: 0.5s"
     >
       <img
         class="h-full w-full object-cover aspect-square group-hover:scale-110 transition-transform duration-500"
@@ -133,7 +138,8 @@
     </div>
 
     <div
-      class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      class="relative fade-up overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+      style="animation-delay: 0.6s"
     >
       <img
         class="h-full w-full object-cover aspect-square group-hover:scale-110 transition-transform duration-500"
@@ -153,3 +159,20 @@
     </div>
   </div>
 </section>
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target); // anima só uma vez
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  document.querySelectorAll(".fade-up").forEach((el) => {
+    observer.observe(el);
+  });
+</script>

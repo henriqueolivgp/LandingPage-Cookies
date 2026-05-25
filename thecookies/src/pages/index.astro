@@ -10,12 +10,12 @@ import OpeningHours from "../components/horario.astro";
 import Footer from "@/components/footer.astro";
 
 const metodosPagamento = [
-  { src: "https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo_2021.svg", alt: "VISA" },
-  { src: "https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg", alt: "Mastercard" },
-  { src: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg", alt: "Apple Pay" },
-  { src: "https://upload.wikimedia.org/wikipedia/commons/4/49/Maestro_logo.svg", alt: "Maestro" },
-  { src: "https://upload.wikimedia.org/wikipedia/commons/d/de/MB_WAY_logo.png", alt: "MBWay" },
-  { src: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Contactless_icon.svg", alt: "Contactless" },
+  { src: "/paments/visa.svg", alt: "VISA" },
+  { src: "/paments/mastercard.svg", alt: "Mastercard" },
+  { src: "/paments/apple-pay.svg", alt: "Apple Pay" },
+  { src: "/paments/maestro.svg", alt: "Maestro" },
+  { src: "/paments/mbway.svg", alt: "MBWay" },
+  { src: "/paments/contactless.png", alt: "Contactless" },
 ];
 ---
 
@@ -46,7 +46,7 @@ const metodosPagamento = [
               logos={metodosPagamento}
               speed={30}
               gap={40}
-              logoHeight={32}
+              logoHeight={40}
               className="opacity-60 hover:opacity-100 transition-opacity"
             />
           </div>
