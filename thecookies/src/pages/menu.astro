@@ -1,0 +1,69 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/navbar.astro";
+import Footer from "../components/footer.astro";
+
+const menu = {
+  cookies: [
+    { nome: "Gotas Tradicional", desc: "A receita original com pepitas de chocolate belga.", preco: "2,50€" },
+    { nome: "Vulcão de Nutella", desc: "Cookie de chocolate com centro líquido de Nutella.", preco: "3,50€" },
+    { nome: "Red Velvet", desc: "Massa rubi com recheio de creme de queijo.", preco: "3,80€" },
+    { nome: "Aveia e Mel", desc: "Saudável, com passas e um toque de mel biológico.", preco: "2,50€" },
+  ],
+  bebidas: [
+    { nome: "Café Espresso", desc: "Blend especial de torra média.", preco: "1,20€" },
+    { nome: "Cappuccino", desc: "Com espuma cremosa de leite fresco.", preco: "2,50€" },
+    { nome: "Chá de Frutos", desc: "Infusão natural servida quente ou fria.", preco: "2,00€" },
+  ]
+};
+---
+
+<Layout title="Menu | Gotas de Amor">
+  <Navbar />
+  
+  <main class="py-20 bg-orange-50 min-h-screen">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl font-bold text-orange-950 text-center mb-12">O Nosso Menu</h1>
+
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-orange-600 mb-8 flex items-center gap-3">
+          🍪 Cookies Artesanais
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          {menu.cookies.map(item => (
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-orange-100 flex justify-between items-start">
+              <div>
+                <h3 class="font-bold text-orange-950">{item.nome}</h3>
+                <p class="text-sm text-orange-800 mt-1">{item.desc}</p>
+              </div>
+              <span class="font-bold text-orange-600">{item.preco}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-orange-600 mb-8 flex items-center gap-3">
+          ☕ Bebidas
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          {menu.bebidas.map(item => (
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-orange-100 flex justify-between items-start">
+              <div>
+                <h3 class="font-bold text-orange-950">{item.nome}</h3>
+                <p class="text-sm text-orange-800 mt-1">{item.desc}</p>
+              </div>
+              <span class="font-bold text-orange-600">{item.preco}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <div class="mt-12 text-center">
+        <p class="text-orange-500 italic">Todos os nossos preços incluem IVA à taxa legal em vigor.</p>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,104 +1,69 @@
 ---
 import InfoBanner from "./infoBanner.astro";
+
+// 1. Descobrir qual é a página atual
+const currentPath = Astro.url.pathname;
+
+// 2. Criar a lista de links para não repetir código
+const navLinks = [
+  { nome: "Início", path: "/" },
+  { nome: "Menu", path: "/menu" },
+  { nome: "Sobre Nós", path: "/sobre" },
+  { nome: "Contactos", path: "/contactos" }
+];
 ---
 
-<nav
-  class="bg-orange-50 fixed w-full z-50 top-0 border-b border-orange-200 shadow-sm"
->
-  <InfoBanner />
-  <div
-    class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4"
-  >
-    <a href="#" class="flex items-center space-x-3">
-      <img class="w-10" src="/Logo.png" alt="Logo Cookie Store" />
-      <span
-        class="self-center text-2xl text-orange-900 font-bold whitespace-nowrap"
-        >Cookie Store</span
-      >
+<nav class="bg-orange-50 relative flex flex-col w-full z-50 border-b border-orange-200 shadow-sm">
+  
+  <div class="max-w-7xl w-full flex flex-wrap items-center justify-between mx-auto p-4">
+    
+    <a href="/" class="flex items-center space-x-3">
+        <img class="w-10" src="/Logo.png" alt="Logo Cookie Store">
+        <span class="self-center hidden md:flex text-2xl text-orange-900 font-bold whitespace-nowrap">Cookie Store</span>
     </a>
 
     <div class="flex md:order-2 space-x-3 md:space-x-0">
-      <a
-        href="https://www.instagram.com/henryolivgp"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:ring-orange-300 font-semibold rounded-lg text-sm px-5 py-2.5 transition-colors shadow-md"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-        </svg>
-        Pedir Agora
-      </a>
-
-      <button
-        id="menu-button"
-        type="button"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-orange-800 rounded-lg md:hidden hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300"
-      >
-        <span class="sr-only">Abrir menu</span>
-        <svg
-          class="w-6 h-6"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16m-7 6h7"></path></svg
-        >
-      </button>
+        <button type="button" class="text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:ring-orange-300 font-semibold rounded-lg text-sm px-5 py-2.5 transition-colors shadow-md">Pedir Agora</button>
+        
+        <button id="menu-button" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-orange-800 rounded-lg md:hidden hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300">
+            <span class="sr-only">Abrir menu</span>
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
     </div>
 
     <div id="navbar-sticky" class="hidden w-full md:flex md:w-auto md:order-1">
-      <ul
-        class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-orange-200 rounded-lg bg-orange-50 md:space-x-8 md:flex-row md:mt-0 md:border-0"
-      >
-        <li>
-          <a href="#" class="block py-2 px-3 text-orange-600 md:p-0">Início</a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-3 text-orange-900 hover:bg-orange-200 md:hover:bg-transparent md:hover:text-orange-600 md:p-0 transition-colors"
-            >Menu</a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-3 text-orange-900 hover:bg-orange-200 md:hover:bg-transparent md:hover:text-orange-600 md:p-0 transition-colors"
-            >Sobre Nós</a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-3 text-orange-900 hover:bg-orange-200 md:hover:bg-transparent md:hover:text-orange-600 md:p-0 transition-colors"
-            >Contactos</a>
-        </li>
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-orange-200 rounded-lg bg-orange-50 md:space-x-8 md:flex-row md:mt-0 md:border-0">
+        
+        {navLinks.map((link) => {
+          const isActive = currentPath === link.path || currentPath === link.path + '/';
+          
+          return (
+            <li>
+              <a 
+                href={link.path} 
+                class={`block py-2 px-3 md:p-0 rounded transition-colors ${
+                  isActive 
+                    ? 'text-white bg-orange-600 md:bg-transparent md:text-orange-600 font-bold' 
+                    : 'text-orange-900 hover:bg-orange-200 md:hover:bg-transparent md:hover:text-orange-600'
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {link.nome}
+              </a>
+            </li>
+          );
+        })}
+
       </ul>
     </div>
   </div>
 </nav>
 
 <script>
-  // Script para alternar o menu mobile
-  const btn = document.getElementById("menu-button");
-  const menu = document.getElementById("navbar-sticky");
+  const btn = document.getElementById('menu-button');
+  const menu = document.getElementById('navbar-sticky');
 
-  btn?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
   });
 </script>
